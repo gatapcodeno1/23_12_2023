@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShooting : DatMonoBehaviour
+public class PlayerMultiShoot : DatMonoBehaviour
 {
-    [SerializeField] protected double attackDelay = 1f;
-    [SerializeField] protected double currentDelay = 1f;
-
+    [SerializeField] protected double attackDelay = 3f;
+    [SerializeField] protected double currentDelay = 3f;
+    [SerializeField] protected int timeShoot = 3;
 
 
     // Start is called before the first frame update
-   
+
 
     // Update is called once per frame
     protected virtual void FixedUpdate()
@@ -30,12 +30,15 @@ public class PlayerShooting : DatMonoBehaviour
     protected virtual void Shooting()
     {
 
-       
-        Debug.Log("Shooting");
-        Vector3 pos = transform.position;
+        
         Quaternion ros = transform.rotation;
         Transform rand = BulletSpawner.Instance.GetRandom();
-        Transform newBullet = BulletSpawner.Instance.Spawn("Bullet_1", pos, ros);
-        newBullet.gameObject.SetActive(true);
+        for (int i = 0; i < timeShoot; i++)
+        {
+            Vector3 pos = transform.position;
+            
+            Transform newBullet = BulletSpawner.Instance.Spawn("Bullet_2",pos, ros);
+            newBullet.gameObject.SetActive(true);
+        }
     }
 }

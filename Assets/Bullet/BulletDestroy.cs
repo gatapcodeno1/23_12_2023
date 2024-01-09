@@ -7,16 +7,11 @@ public class BulletDestroy : ObjectDestroy
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        
+        if(Vector3.Distance(this.transform.parent.position,PlayerController.Instance.GetPlayer().position) > 20f)
+        {
+            BulletSpawner.Instance.Despawner(transform.parent);
+        }
     }
-    protected override void OnEnable()
-    {
-        // base destroy by times
-        Invoke(nameof(DestroyBullet), 5);
-    }
-
-    protected virtual void DestroyBullet()
-    {
-        //BulletSpawner.Instance.Despawner(transform.parent);
-    }
+    
+    
 }
